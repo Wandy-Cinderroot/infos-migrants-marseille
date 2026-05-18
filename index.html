@@ -231,7 +231,7 @@
   container: hiddenDiv,
   style: 'carte/style.json',
   center: map.getCenter(),
-  zoom: map.getZoom() - Math.log2(4),  // compense le pixelRatio
+  zoom: map.getZoom() + Math.log2(4),  // compense le pixelRatio
   bearing: map.getBearing(),
   pitch: map.getPitch(),
   preserveDrawingBuffer: true,
