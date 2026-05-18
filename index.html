@@ -22,6 +22,7 @@
       --panel:    #ffffff;
       --border:   #e0dbd2;
     }
+    
 
     body {
       font-family: 'DM Sans', sans-serif;
@@ -182,6 +183,7 @@
 </header>
 
 <div id="map"></div>
+<button id="export-btn">⬇ Exporter l'image</button>
 
 <script>
   const CATEGORIES = {
@@ -196,8 +198,20 @@
     container: 'map',
     style: 'carte/style.json',
     center: [5.3698, 43.2965],
-    zoom: 13
+    zoom: 13,
+    preserveDrawingBuffer: true
   });
+
+  document.getElementById('export-btn').addEventListener('click', () => {
+  map.once('idle', () => {
+    const canvas = map.getCanvas();
+    const link = document.createElement('a');
+    link.download = 'carte-migrants-marseille.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  });
+  map.triggerRepaint();
+});
 
   map.addControl(new maplibregl.NavigationControl(), 'bottom-right');
 
@@ -284,6 +298,25 @@
       }
     });
   });
+  #export-btn {
+    position: absolute;
+    bottom: 40px;
+    left: 16px;
+    z-index: 10;
+    padding: 8px 16px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.1s;
+  }
+  #export-btn:hover { transform: translateY(-1px); }
+
+  
 </script>
 
 </body>
