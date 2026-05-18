@@ -228,15 +228,15 @@
   document.body.appendChild(hiddenDiv);
 
   const hiResMap = new maplibregl.Map({
-    container: hiddenDiv,
-    style: 'carte/style.json',
-    center: map.getCenter(),
-    zoom: map.getZoom(),
-    bearing: map.getBearing(),
-    pitch: map.getPitch(),
-    preserveDrawingBuffer: true,
-    pixelRatio: 4  // 4x la résolution normale
-  });
+  container: hiddenDiv,
+  style: 'carte/style.json',
+  center: map.getCenter(),
+  zoom: map.getZoom() - Math.log2(4),  // compense le pixelRatio
+  bearing: map.getBearing(),
+  pitch: map.getPitch(),
+  preserveDrawingBuffer: true,
+  pixelRatio: 4
+});
 
   hiResMap.once('idle', () => {
     const canvas = hiResMap.getCanvas();
