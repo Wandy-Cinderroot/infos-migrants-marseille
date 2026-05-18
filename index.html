@@ -221,14 +221,32 @@
   });
 
   document.getElementById('export-btn').addEventListener('click', () => {
-  map.once('idle', () => {
-    const canvas = map.getCanvas();
+
+  // Crée une carte cachée en haute résolution
+  const hiddenDiv = document.createElement('div');
+  hiddenDiv.style.cssText = 'position:absolute;width:4096px;height:3072px;visibility:hidden';
+  document.body.appendChild(hiddenDiv);
+
+  const hiResMap = new maplibregl.Map({
+    container: hiddenDiv,
+    style: 'carte/style.json',
+    center: map.getCenter(),
+    zoom: map.getZoom(),
+    bearing: map.getBearing(),
+    pitch: map.getPitch(),
+    preserveDrawingBuffer: true,
+    pixelRatio: 4  // 4x la résolution normale
+  });
+
+  hiResMap.once('idle', () => {
+    const canvas = hiResMap.getCanvas();
     const link = document.createElement('a');
-    link.download = 'carte-migrants-marseille.png';
+    link.download = 'carte-migrants-marseille-hq.png';
     link.href = canvas.toDataURL('image/png');
     link.click();
+    hiResMap.remove();
+    document.body.removeChild(hiddenDiv);
   });
-  map.triggerRepaint();
 });
 
   map.addControl(new maplibregl.NavigationControl(), 'bottom-right');
