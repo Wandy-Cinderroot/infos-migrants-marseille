@@ -1,0 +1,6 @@
+﻿id,nom,adresse,lon,lat,horaires,notes
+1,Accueil de jour - Crimée,54 Rue de Crimée 13003 Marseille,5.3810888,43.3067913,"Lundi 9h-12h / Mardi, mercredi, jeudi, vendredi 9h-16h",
+2,Accueil de jour - Bouès,34B Boulevard Bouès 13003 Marseille,5.381752,43.3122187,Lundi au dimanche 8h-16h15,Fermé mardi après-midi et mercredi après-midi
+3,Secours Catholique - Malaval,11 Rue Malaval 13002 Marseille,5.3703009,43.3034201,"Lundi, mercredi, jeudi et vendredi 8h30-11h",
+4,Accueil de jour - St Joseph,29-31 Rue Stanislas Torrents 13006 Marseille,5.378237,43.287851,Lundi au vendredi 9h-13h,
+5,Accueil de jour - Lieutaud,41 Cr. Lieutaud 13006 Marseille,5.3825623,43.2931295,Lundi au vendredi 9h-16h30,Fermé mardi après-midi. Mercredi réservé aux femmes

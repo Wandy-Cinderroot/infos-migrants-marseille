@@ -1,0 +1,75 @@
+{
+   "type": "FeatureCollection",
+   "features": [
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 5.3989983,43.3062109 ]
+    },
+    "properties": {
+    "id":1,
+    "nom":"AUP",
+    "numéro de voie":"62 Boulevard du Jardin Zoologique 13004 Marseille",
+    "horaires":"Mardi 18h30-20h / Mercredi 14h-17h",
+    "notes":"Mardi : droits sociaux. Mercredi : droit d'asile"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 5.3706151,43.3008795 ]
+    },
+    "properties": {
+    "id":2,
+    "nom":"Cimad",
+    "numéro de voie":"8A Rue Jean-Marc Cathala 13002 Marseille",
+    "horaires":"Lundi 13h30-16h / Jeudi 13h30-16h",
+    "notes":"Lundi : droit de séjour. Jeudi : droit d'asile"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 5.3856628,43.2986827 ]
+    },
+    "properties": {
+    "id":3,
+    "nom":"El Manba",
+    "numéro de voie":"8 Rue Barbaroux 13001 Marseille",
+    "horaires":"Lundi 18h-20h",
+    "notes":"Droit d'asile, procédure Dublin, accompagnement juridique"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 5.3874814,43.3145305 ]
+    },
+    "properties": {
+    "id":4,
+    "nom":"Fraternité Belle de Mai",
+    "numéro de voie":"7 Boulevard Burel 13003 Marseille",
+    "horaires":"Lundi et jeudi 9h-12h / Mardi 9h-12h",
+    "notes":"Lundi et jeudi : écrivain public. Mardi : permanence juridique"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 5.3817239,43.2981284 ]
+    },
+    "properties": {
+    "id":5,
+    "nom":"Tous Réfugiés",
+    "numéro de voie":"93 La Canebière 13001 Marseille",
+    "horaires":"Samedi 12h-15h",
+    "notes":"Aide juridique et administrative"
+    }
+  }
+]
+}

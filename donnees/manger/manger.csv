@@ -1,0 +1,7 @@
+﻿id,nom,adresse,lon,lat,horaires,notes
+1,Ramina,41 Rue Jobin 10003 Marseille,5.3900447,43.3104849,Jeudi 16h30-18h30,
+2,Vendredi 13,Place de la Joliette 13002 Marseille,5.3662183,43.3049207,Mardi et jeudi 19h-20h30,
+3,Camion Emmaüs,Cours Joseph Thierry 13001 Marseille,5.385329,43.300025,Mardi au vendredi 7h30-9h / Mardi au vendredi 10h-11h,"10h-11hPetit-déjeuner 7h30-9h, soupe 10h-11h"
+4,Missionaire de la charité,11 Avenue Alphée Cartier 13003 Marseille,5.3772566,43.3127526,"Lundi, mardi, mercredi, vendredi, samedi et dimanche 9h30-11h",
+5,Inter-Asso,Place Victor Hugo 13003 Marseille,5.3786158,43.3044765,Lundi et vendredi 19h-20h,
+6,Inter-Asso,Escalier de la gare 13003 Marseille,5.380522,43.301813,Jeudi et vendredi 19h-20h,

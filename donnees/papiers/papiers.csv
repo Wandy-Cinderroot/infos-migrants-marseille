@@ -1,0 +1,6 @@
+﻿id,nom,numéro de voie,lon,lat,horaires,notes
+1,AUP,62 Boulevard du Jardin Zoologique 13004 Marseille,5.3989983,43.3062109,Mardi 18h30-20h / Mercredi 14h-17h,Mardi : droits sociaux. Mercredi : droit d'asile
+2,Cimad,8A Rue Jean-Marc Cathala 13002 Marseille,5.3706151,43.3008795,Lundi 13h30-16h / Jeudi 13h30-16h,Lundi : droit de séjour. Jeudi : droit d'asile
+3,El Manba,8 Rue Barbaroux 13001 Marseille,5.3856628,43.2986827,Lundi 18h-20h,"Droit d'asile, procédure Dublin, accompagnement juridique"
+4,Fraternité Belle de Mai,7 Boulevard Burel 13003 Marseille,5.3874814,43.3145305,Lundi et jeudi 9h-12h / Mardi 9h-12h,Lundi et jeudi : écrivain public. Mardi : permanence juridique
+5,Tous Réfugiés,93 La Canebière 13001 Marseille,5.3817239,43.2981284,Samedi 12h-15h,Aide juridique et administrative

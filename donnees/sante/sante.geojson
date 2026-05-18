@@ -1,0 +1,75 @@
+{
+   "type": "FeatureCollection",
+   "features": [
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 5.3934025,43.2849806 ]
+    },
+    "properties": {
+    "id":1,
+    "nom":"CASO",
+    "numéro de voie":"129 Avenue de Toulon 13005 Marseille",
+    "horaires":"Lundi 13h30-15h30 / Mercredi et vendredi 9h-11h",
+    "notes":"Arriver très tôt"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 5.39669,43.292123 ]
+    },
+    "properties": {
+    "id":2,
+    "nom":"Pass Adulte",
+    "numéro de voie":"156 Rue St Pierre 13005 Marseille",
+    "horaires":"Mercredi et vendredi à partir de 9h",
+    "notes":"Arriver très tôt"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 5.402648,43.291834 ]
+    },
+    "properties": {
+    "id":3,
+    "nom":"Pass Dentaire",
+    "numéro de voie":"264 Rue St Pierre 13005, Marseille",
+    "horaires":"Lundi et jeudi à partir de 9h",
+    "notes":"Arriver très tôt. Demander Laurence Masson (AS)"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 5.382995,43.3066991 ]
+    },
+    "properties": {
+    "id":4,
+    "nom":"Planning Familial",
+    "numéro de voie":"106 Boulevard National 13003 Marseille",
+    "horaires":"Mardi, mercredi et vendredi 14h-18h / Vendredi 14h-17h",
+    "notes":"Écoute 14h-18h, dépistage vendredi 14h-17h"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 5.3869558,43.301466 ]
+    },
+    "properties": {
+    "id":5,
+    "nom":"Comede",
+    "numéro de voie":"52 Rue du Coq 13001 Marseille",
+    "horaires":"Mardi 8h-12h",
+    "notes":"Permanences d'accompagnement au soin"
+    }
+  }
+]
+}

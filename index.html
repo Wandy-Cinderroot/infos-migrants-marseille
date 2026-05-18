@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Infos Migrants Marseille</title>
+  <link href="https://unpkg.com/maplibre-gl/dist/maplibre-gl.css" rel="stylesheet">
+  <script src="https://unpkg.com/maplibre-gl/dist/maplibre-gl.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap');
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --manger:   #E05A2B;
+      --journee:  #3A86C8;
+      --sante:    #2BAE66;
+      --papiers:  #8B5CF6;
+      --francais: #F59E0B;
+      --bg:       #F7F4EF;
+      --text:     #1a1a1a;
+      --panel:    #ffffff;
+      --border:   #e0dbd2;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      padding: 12px 20px;
+      background: var(--panel);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      z-index: 10;
+    }
+
+    header h1 {
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    header p {
+      font-size: 12px;
+      color: #888;
+    }
+
+    .filters {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-left: auto;
+    }
+
+    .filter-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 20px;
+      border: 2px solid transparent;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.1s;
+      background: var(--bg);
+    }
+
+    .filter-btn:hover { transform: translateY(-1px); }
+
+    .filter-btn.active { border-color: currentColor; }
+    .filter-btn.inactive { opacity: 0.35; }
+
+    .filter-btn .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .filter-btn[data-cat="manger"]   { color: var(--manger); }
+    .filter-btn[data-cat="journee"]  { color: var(--journee); }
+    .filter-btn[data-cat="sante"]    { color: var(--sante); }
+    .filter-btn[data-cat="papiers"]  { color: var(--papiers); }
+    .filter-btn[data-cat="francais"] { color: var(--francais); }
+
+    #map {
+      flex: 1;
+      width: 100%;
+    }
+
+    /* Popup */
+    .maplibregl-popup-content {
+      font-family: 'DM Sans', sans-serif;
+      border-radius: 10px;
+      padding: 0;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+      min-width: 220px;
+      max-width: 280px;
+    }
+
+    .popup-header {
+      padding: 10px 14px 8px;
+      font-weight: 600;
+      font-size: 13px;
+      color: white;
+    }
+
+    .popup-body {
+      padding: 10px 14px 12px;
+      background: white;
+    }
+
+    .popup-field {
+      font-size: 12px;
+      color: #555;
+      margin-bottom: 5px;
+      line-height: 1.4;
+    }
+
+    .popup-field strong {
+      display: block;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #aaa;
+      margin-bottom: 2px;
+    }
+
+    .popup-note {
+      margin-top: 8px;
+      padding: 6px 8px;
+      background: #fdf6ec;
+      border-radius: 6px;
+      font-size: 11px;
+      color: #888;
+      line-height: 1.4;
+    }
+
+    .maplibregl-popup-close-button {
+      font-size: 16px;
+      color: rgba(255,255,255,0.8);
+      padding: 6px 10px;
+    }
+
+    .maplibregl-popup-close-button:hover { color: white; background: transparent; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>Infos Migrants — Marseille</h1>
+    <p>Lieux d'aide et de services</p>
+  </div>
+  <div class="filters">
+    <button class="filter-btn active" data-cat="manger">
+      <span class="dot"></span> Manger
+    </button>
+    <button class="filter-btn active" data-cat="journee">
+      <span class="dot"></span> Journée
+    </button>
+    <button class="filter-btn active" data-cat="sante">
+      <span class="dot"></span> Santé
+    </button>
+    <button class="filter-btn active" data-cat="papiers">
+      <span class="dot"></span> Papiers
+    </button>
+    <button class="filter-btn active" data-cat="francais">
+      <span class="dot"></span> Français
+    </button>
+  </div>
+</header>
+
+<div id="map"></div>
+
+<script>
+  const CATEGORIES = {
+    manger:   { label: 'Manger',   color: '#E05A2B', file: 'donnees/manger/manger.geojson' },
+    journee:  { label: 'Journée',  color: '#3A86C8', file: 'donnees/journee/journee.geojson' },
+    sante:    { label: 'Santé',    color: '#2BAE66', file: 'donnees/sante/sante.geojson' },
+    papiers:  { label: 'Papiers',  color: '#8B5CF6', file: 'donnees/papiers/papiers.geojson' },
+    francais: { label: 'Français', color: '#F59E0B', file: 'donnees/francais/francais.geojson' },
+  };
+
+  const map = new maplibregl.Map({
+    container: 'map',
+    style: 'carte/style.json',
+    center: [5.3698, 43.2965],
+    zoom: 13
+  });
+
+  map.addControl(new maplibregl.NavigationControl(), 'bottom-right');
+
+  // Suivi de l'état des filtres
+  const visible = { manger: true, journee: true, sante: true, papiers: true, francais: true };
+
+  map.on('load', () => {
+
+    // Chargement de chaque couche
+    Object.entries(CATEGORIES).forEach(([cat, { color, file }]) => {
+
+      map.addSource(cat, { type: 'geojson', data: file });
+
+      // Cercle de fond (halo)
+      map.addLayer({
+        id: `${cat}-halo`,
+        type: 'circle',
+        source: cat,
+        paint: {
+          'circle-radius': 14,
+          'circle-color': color,
+          'circle-opacity': 0.15
+        }
+      });
+
+      // Point principal
+      map.addLayer({
+        id: `${cat}-point`,
+        type: 'circle',
+        source: cat,
+        paint: {
+          'circle-radius': 8,
+          'circle-color': color,
+          'circle-stroke-width': 2,
+          'circle-stroke-color': '#ffffff'
+        }
+      });
+
+      // Popup au clic
+      map.on('click', `${cat}-point`, (e) => {
+        const p = e.features[0].properties;
+        const adresse = p.adresse || p['numéro de voie'] || '';
+        const noteHtml = p.notes
+          ? `<div class="popup-note">⚠️ ${p.notes}</div>`
+          : '';
+
+        new maplibregl.Popup({ offset: 12 })
+          .setLngLat(e.lngLat)
+          .setHTML(`
+            <div class="popup-header" style="background:${color}">
+              ${p.nom}
+            </div>
+            <div class="popup-body">
+              <div class="popup-field">
+                <strong>Adresse</strong>${adresse}
+              </div>
+              <div class="popup-field">
+                <strong>Horaires</strong>${p.horaires}
+              </div>
+              ${noteHtml}
+            </div>
+          `)
+          .addTo(map);
+      });
+
+      map.on('mouseenter', `${cat}-point`, () => map.getCanvas().style.cursor = 'pointer');
+      map.on('mouseleave', `${cat}-point`, () => map.getCanvas().style.cursor = '');
+    });
+  });
+
+  // Gestion des filtres
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const cat = btn.dataset.cat;
+      visible[cat] = !visible[cat];
+
+      btn.classList.toggle('active', visible[cat]);
+      btn.classList.toggle('inactive', !visible[cat]);
+
+      const viz = visible[cat] ? 'visible' : 'none';
+      if (map.getLayer(`${cat}-point`)) {
+        map.setLayoutProperty(`${cat}-point`, 'visibility', viz);
+        map.setLayoutProperty(`${cat}-halo`,  'visibility', viz);
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

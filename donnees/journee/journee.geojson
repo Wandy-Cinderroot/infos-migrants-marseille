@@ -1,0 +1,75 @@
+{
+   "type": "FeatureCollection",
+   "features": [
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 5.3810888,43.3067913 ]
+    },
+    "properties": {
+    "id":1,
+    "nom":"Accueil de jour - Crimée",
+    "adresse":"54 Rue de Crimée 13003 Marseille",
+    "horaires":"Lundi 9h-12h / Mardi, mercredi, jeudi, vendredi 9h-16h",
+    "notes":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 5.381752,43.3122187 ]
+    },
+    "properties": {
+    "id":2,
+    "nom":"Accueil de jour - Bouès",
+    "adresse":"34B Boulevard Bouès 13003 Marseille",
+    "horaires":"Lundi au dimanche 8h-16h15",
+    "notes":"Fermé mardi après-midi et mercredi après-midi"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 5.3703009,43.3034201 ]
+    },
+    "properties": {
+    "id":3,
+    "nom":"Secours Catholique - Malaval",
+    "adresse":"11 Rue Malaval 13002 Marseille",
+    "horaires":"Lundi, mercredi, jeudi et vendredi 8h30-11h",
+    "notes":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 5.378237,43.287851 ]
+    },
+    "properties": {
+    "id":4,
+    "nom":"Accueil de jour - St Joseph",
+    "adresse":"29-31 Rue Stanislas Torrents 13006 Marseille",
+    "horaires":"Lundi au vendredi 9h-13h",
+    "notes":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 5.3825623,43.2931295 ]
+    },
+    "properties": {
+    "id":5,
+    "nom":"Accueil de jour - Lieutaud",
+    "adresse":"41 Cr. Lieutaud 13006 Marseille",
+    "horaires":"Lundi au vendredi 9h-16h30",
+    "notes":"Fermé mardi après-midi. Mercredi réservé aux femmes"
+    }
+  }
+]
+}
