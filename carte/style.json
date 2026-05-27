@@ -34,7 +34,365 @@
         "https://maps.geo.eu-west-1.amazonaws.com/v2/tiles/vector.basemap/{z}/{x}/{y}?key=v1.public.eyJqdGkiOiJiOTNkYjBlZi04OWUzLTQxMGUtODFhMC0zYjZjZjVmZWZmMDgifYtukap0NBaJpcrS6Vit9j03GJgK9Bn-RSu5UCe3jkdSql2kKp3IEgLPtyLssbmKUdVO11sXddjK3ZOZy8V6QG0olv0K_1tOxyMIe4DAO3IV6H4VzHWiaXlbSakGiEgFLuHBdcfLDeMotye7N6rSRxuZb0CN9ytH9VjLly6-NEBRZezO_qPQyvdTFdeZsARIpL0f9YVpxPxPVvUcAWYCk5LpaPseRCDPrY5SlCdA1ZKqUA4F9RzxSTxB73Fel_SoNDkCNaux1VposBu791-uUpDzUpr7leKckrPXrpZ2hwnFbafVxFV9vq4fLTpB5KoBksuLfGNIwAx1RLLxWuMhE4c.ZGQzZDY2OGQtMWQxMy00ZTEwLWIyZGUtOGVjYzUzMjU3OGE4"
       ],
       "type": "vector"
-    }  },
+    },
+    "p00veub": {
+      "type": "geojson",
+      "cluster": false,
+      "data": {
+        "features": [
+          {
+            "type": "Feature",
+            "properties": {
+              "id": 2,
+              "nom": "El Manba",
+              "numéro de voie": "8 Rue Barbaroux 13001 Marseille",
+              "horaires": "Vendredi 18h-20h",
+              "notes": ""
+            },
+            "geometry": {"coordinates": [5.385662, 43.298682], "type": "Point"},
+            "id": "31bf62c1d16e0760f487dd7889d4d322"
+          },
+          {
+            "type": "Feature",
+            "properties": {
+              "id": 4,
+              "nom": "Tous Réfugiés",
+              "numéro de voie": "93 La Canebière 13001 Marseille",
+              "horaires": "Lundi et mercredi 18h-20h",
+              "notes": ""
+            },
+            "geometry": {"coordinates": [5.381723, 43.298128], "type": "Point"},
+            "id": "78c95e5fb8696354f6b1f5cf49cf8fab"
+          },
+          {
+            "type": "Feature",
+            "properties": {
+              "id": 3,
+              "nom": "Didac'Ressources",
+              "numéro de voie": "41 Rue Jobin 13003 Marseille",
+              "horaires": "Lundi, mercredi et vendredi 9h30-11h30",
+              "notes": ""
+            },
+            "geometry": {"coordinates": [5.390044, 43.310484], "type": "Point"},
+            "id": "b4fe40a99baa32c91017f67f1831fce6"
+          },
+          {
+            "type": "Feature",
+            "properties": {
+              "id": 5,
+              "nom": "Centre Social Bernard Dubois",
+              "numéro de voie": "16 Rue Bernard du Bois 13001 Marseille",
+              "horaires": "Lundi 9h-11h et 14h-16h / Jeudi 9h-11h30",
+              "notes": ""
+            },
+            "geometry": {"coordinates": [5.376289, 43.301644], "type": "Point"},
+            "id": "d6a4d03a8751736d5fdfcd78fbb73540"
+          },
+          {
+            "type": "Feature",
+            "properties": {
+              "id": 1,
+              "nom": "Accueil - St Joseph",
+              "numéro de voie": "29-31 Rue Stanislas Torrents 13006 Marseille",
+              "horaires": "Mardi et jeudi 9h-13h",
+              "notes": ""
+            },
+            "geometry": {"coordinates": [5.378237, 43.287851], "type": "Point"},
+            "id": "db790693e76aedcb83a2f0b8f5a1ba76"
+          }
+        ],
+        "type": "FeatureCollection"
+      }
+    },
+    "manger": {
+      "type": "geojson",
+      "cluster": false,
+      "data": {
+        "features": [
+          {
+            "type": "Feature",
+            "properties": {
+              "id": 1,
+              "nom": "Ramina",
+              "adresse": "41 Rue Jobin 10003 Marseille",
+              "horaires": "Jeudi 16h30-18h30",
+              "notes": ""
+            },
+            "geometry": {"coordinates": [5.390044, 43.310484], "type": "Point"},
+            "id": "1bbe95c9f70ac3dc7c964024771e47c8"
+          },
+          {
+            "type": "Feature",
+            "properties": {
+              "id": 2,
+              "nom": "Vendredi 13",
+              "adresse": "Place de la Joliette 13002 Marseille",
+              "horaires": "Mardi et jeudi 19h-20h30",
+              "notes": ""
+            },
+            "geometry": {"coordinates": [5.366218, 43.30492], "type": "Point"},
+            "id": "4103b6d6542ae934bb143e7d3b8f16a5"
+          },
+          {
+            "type": "Feature",
+            "properties": {
+              "id": 4,
+              "nom": "Missionaire de la charité",
+              "adresse": "11 Avenue Alphée Cartier 13003 Marseille",
+              "horaires": "Lundi, mardi, mercredi, vendredi, samedi et dimanche 9h30-11h",
+              "notes": ""
+            },
+            "geometry": {"coordinates": [5.377256, 43.312752], "type": "Point"},
+            "id": "47e411f79a6a3de4060221bc1f005ebe"
+          },
+          {
+            "type": "Feature",
+            "properties": {
+              "id": 3,
+              "nom": "Camion Emmaüs",
+              "adresse": "Cours Joseph Thierry 13001 Marseille",
+              "horaires": "Mardi au vendredi 7h30-9h / Mardi au vendredi 10h-11h",
+              "notes": "10h-11hPetit-déjeuner 7h30-9h, soupe 10h-11h"
+            },
+            "geometry": {"coordinates": [5.385329, 43.300025], "type": "Point"},
+            "id": "b811410349d742905460575a20c44605"
+          },
+          {
+            "type": "Feature",
+            "properties": {
+              "id": 6,
+              "nom": "Inter-Asso",
+              "adresse": "Escalier de la gare 13003 Marseille",
+              "horaires": "Jeudi et vendredi 19h-20h",
+              "notes": ""
+            },
+            "geometry": {"coordinates": [5.380522, 43.301813], "type": "Point"},
+            "id": "deef60aa758e36150fdd56ae05632022"
+          },
+          {
+            "type": "Feature",
+            "properties": {
+              "id": 5,
+              "nom": "Inter-Asso",
+              "adresse": "Place Victor Hugo 13003 Marseille",
+              "horaires": "Lundi et vendredi 19h-20h",
+              "notes": ""
+            },
+            "geometry": {"coordinates": [5.378615, 43.304476], "type": "Point"},
+            "id": "ed3d15dde97deb4776d557638cabffe6"
+          }
+        ],
+        "type": "FeatureCollection"
+      }
+    },
+    "Santé": {
+      "type": "geojson",
+      "cluster": false,
+      "data": {
+        "features": [
+          {
+            "type": "Feature",
+            "properties": {
+              "id": 5,
+              "nom": "Comede",
+              "numéro de voie": "52 Rue du Coq 13001 Marseille",
+              "horaires": "Mardi 8h-12h",
+              "notes": "Permanences d'accompagnement au soin"
+            },
+            "geometry": {"coordinates": [5.386955, 43.301466], "type": "Point"},
+            "id": "5b1fea1cefe82b63ef991edd0c80668f"
+          },
+          {
+            "type": "Feature",
+            "properties": {
+              "id": 4,
+              "nom": "Planning Familial",
+              "numéro de voie": "106 Boulevard National 13003 Marseille",
+              "horaires": "Mardi, mercredi et vendredi 14h-18h / Vendredi 14h-17h",
+              "notes": "Écoute 14h-18h, dépistage vendredi 14h-17h"
+            },
+            "geometry": {"coordinates": [5.382995, 43.306699], "type": "Point"},
+            "id": "9eb216440fff80fbb2c3c72f3db25adb"
+          },
+          {
+            "type": "Feature",
+            "properties": {
+              "id": 1,
+              "nom": "CASO",
+              "numéro de voie": "129 Avenue de Toulon 13005 Marseille",
+              "horaires": "Lundi 13h30-15h30 / Mercredi et vendredi 9h-11h",
+              "notes": "Arriver très tôt"
+            },
+            "geometry": {"coordinates": [5.393402, 43.28498], "type": "Point"},
+            "id": "a3105bd957b07f5f0d60356e9426c938"
+          },
+          {
+            "type": "Feature",
+            "properties": {
+              "id": 3,
+              "nom": "Pass Dentaire",
+              "numéro de voie": "264 Rue St Pierre 13005, Marseille",
+              "horaires": "Lundi et jeudi à partir de 9h",
+              "notes": "Arriver très tôt. Demander Laurence Masson (AS)"
+            },
+            "geometry": {"coordinates": [5.402648, 43.291834], "type": "Point"},
+            "id": "db2ec0f1cb1a3a0051bfb792e7f8eda6"
+          },
+          {
+            "type": "Feature",
+            "properties": {
+              "id": 2,
+              "nom": "Pass Adulte",
+              "numéro de voie": "156 Rue St Pierre 13005 Marseille",
+              "horaires": "Mercredi et vendredi à partir de 9h",
+              "notes": "Arriver très tôt"
+            },
+            "geometry": {"coordinates": [5.39669, 43.292123], "type": "Point"},
+            "id": "f05737986ef5d71e3309c310b09542e0"
+          }
+        ],
+        "type": "FeatureCollection"
+      }
+    },
+    "Papiers": {
+      "type": "geojson",
+      "cluster": false,
+      "data": {
+        "features": [
+          {
+            "type": "Feature",
+            "properties": {
+              "id": 1,
+              "nom": "AUP",
+              "numéro de voie": "62 Boulevard du Jardin Zoologique 13004 Marseille",
+              "horaires": "Mardi 18h30-20h / Mercredi 14h-17h",
+              "notes": "Mardi : droits sociaux. Mercredi : droit d'asile"
+            },
+            "geometry": {"coordinates": [5.398998, 43.30621], "type": "Point"},
+            "id": "01c007490af5fcb9de267dc774a12404"
+          },
+          {
+            "type": "Feature",
+            "properties": {
+              "id": 2,
+              "nom": "Cimad",
+              "numéro de voie": "8A Rue Jean-Marc Cathala 13002 Marseille",
+              "horaires": "Lundi 13h30-16h / Jeudi 13h30-16h",
+              "notes": "Lundi : droit de séjour. Jeudi : droit d'asile"
+            },
+            "geometry": {"coordinates": [5.370615, 43.300879], "type": "Point"},
+            "id": "237ef8c7a3ab05b1288933430ff04fea"
+          },
+          {
+            "type": "Feature",
+            "properties": {
+              "id": 4,
+              "nom": "Fraternité Belle de Mai",
+              "numéro de voie": "7 Boulevard Burel 13003 Marseille",
+              "horaires": "Lundi et jeudi 9h-12h / Mardi 9h-12h",
+              "notes": "Lundi et jeudi : écrivain public. Mardi : permanence juridique"
+            },
+            "geometry": {"coordinates": [5.387481, 43.31453], "type": "Point"},
+            "id": "315869798f29fb232d4d25ef92e94c14"
+          },
+          {
+            "type": "Feature",
+            "properties": {
+              "id": 3,
+              "nom": "El Manba",
+              "numéro de voie": "8 Rue Barbaroux 13001 Marseille",
+              "horaires": "Lundi 18h-20h",
+              "notes": "Droit d'asile, procédure Dublin, accompagnement juridique"
+            },
+            "geometry": {"coordinates": [5.385662, 43.298682], "type": "Point"},
+            "id": "3a4253bacbf839a8cdfb94b68bdd86aa"
+          },
+          {
+            "type": "Feature",
+            "properties": {
+              "id": 5,
+              "nom": "Tous Réfugiés",
+              "numéro de voie": "93 La Canebière 13001 Marseille",
+              "horaires": "Samedi 12h-15h",
+              "notes": "Aide juridique et administrative"
+            },
+            "geometry": {"coordinates": [5.381723, 43.298128], "type": "Point"},
+            "id": "bf2c6f685d4ad2723cab5dffd9c92f2f"
+          }
+        ],
+        "type": "FeatureCollection"
+      }
+    },
+    "Passer la journée": {
+      "type": "geojson",
+      "cluster": false,
+      "data": {
+        "features": [
+          {
+            "type": "Feature",
+            "properties": {
+              "id": 4,
+              "nom": "Accueil de jour - St Joseph",
+              "adresse": "29-31 Rue Stanislas Torrents 13006 Marseille",
+              "horaires": "Lundi au vendredi 9h-13h",
+              "notes": ""
+            },
+            "geometry": {"coordinates": [5.378237, 43.287851], "type": "Point"},
+            "id": "1e55231ccee86a156924fcfc353f9b74"
+          },
+          {
+            "type": "Feature",
+            "properties": {
+              "id": 5,
+              "nom": "Accueil de jour - Lieutaud",
+              "adresse": "41 Cr. Lieutaud 13006 Marseille",
+              "horaires": "Lundi au vendredi 9h-16h30",
+              "notes": "Fermé mardi après-midi. Mercredi réservé aux femmes"
+            },
+            "geometry": {"coordinates": [5.382562, 43.293129], "type": "Point"},
+            "id": "55d04a65cf90d16107b7d9ef1080c70a"
+          },
+          {
+            "type": "Feature",
+            "properties": {
+              "id": 3,
+              "nom": "Secours Catholique - Malaval",
+              "adresse": "11 Rue Malaval 13002 Marseille",
+              "horaires": "Lundi, mercredi, jeudi et vendredi 8h30-11h",
+              "notes": ""
+            },
+            "geometry": {"coordinates": [5.3703, 43.30342], "type": "Point"},
+            "id": "621c87008eefe6afa86b1caa14ad269f"
+          },
+          {
+            "type": "Feature",
+            "properties": {
+              "id": 1,
+              "nom": "Accueil de jour - Crimée",
+              "adresse": "54 Rue de Crimée 13003 Marseille",
+              "horaires": "Lundi 9h-12h / Mardi, mercredi, jeudi, vendredi 9h-16h",
+              "notes": ""
+            },
+            "geometry": {"coordinates": [5.381088, 43.306791], "type": "Point"},
+            "id": "6a384c63c1409c362fb2872a500205f4"
+          },
+          {
+            "type": "Feature",
+            "properties": {
+              "id": 2,
+              "nom": "Accueil de jour - Bouès",
+              "adresse": "34B Boulevard Bouès 13003 Marseille",
+              "horaires": "Lundi au dimanche 8h-16h15",
+              "notes": "Fermé mardi après-midi et mercredi après-midi"
+            },
+            "geometry": {"coordinates": [5.381752, 43.312218], "type": "Point"},
+            "id": "dcd163fb989c2f325dd384bbe81a3f37"
+          }
+        ],
+        "type": "FeatureCollection"
+      }
+    }
+  },
   "sprite": "https://maps.geo.eu-west-1.amazonaws.com/v2/styles/3_2_1/Standard/Light/Default/sprites/sprites",
   "glyphs": "https://maps.geo.eu-west-1.amazonaws.com/v2/glyphs/{fontstack}/{range}.pbf",
   "layers": [
