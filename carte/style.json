@@ -1,117 +1,40 @@
-            },
-            "geometry": {"coordinates": [5.370615, 43.300879], "type": "Point"},
-            "id": "237ef8c7a3ab05b1288933430ff04fea"
-          },
-          {
-            "type": "Feature",
-            "properties": {
-              "id": 4,
-              "nom": "Fraternité Belle de Mai",
-              "numéro de voie": "7 Boulevard Burel 13003 Marseille",
-              "horaires": "Lundi et jeudi 9h-12h / Mardi 9h-12h",
-              "notes": "Lundi et jeudi : écrivain public. Mardi : permanence juridique"
-            },
-            "geometry": {"coordinates": [5.387481, 43.31453], "type": "Point"},
-            "id": "315869798f29fb232d4d25ef92e94c14"
-          },
-          {
-            "type": "Feature",
-            "properties": {
-              "id": 3,
-              "nom": "El Manba",
-              "numéro de voie": "8 Rue Barbaroux 13001 Marseille",
-              "horaires": "Lundi 18h-20h",
-              "notes": "Droit d'asile, procédure Dublin, accompagnement juridique"
-            },
-            "geometry": {"coordinates": [5.385662, 43.298682], "type": "Point"},
-            "id": "3a4253bacbf839a8cdfb94b68bdd86aa"
-          },
-          {
-            "type": "Feature",
-            "properties": {
-              "id": 5,
-              "nom": "Tous Réfugiés",
-              "numéro de voie": "93 La Canebière 13001 Marseille",
-              "horaires": "Samedi 12h-15h",
-              "notes": "Aide juridique et administrative"
-            },
-            "geometry": {"coordinates": [5.381723, 43.298128], "type": "Point"},
-            "id": "bf2c6f685d4ad2723cab5dffd9c92f2f"
-          }
-        ],
-        "type": "FeatureCollection"
+{
+  "version": 8,
+  "name": "Carte Spots Migrants Marseille",
+  "metadata": {
+    "aws:virtual-variant": [
+      {"key": "terrain", "variants": [{"id": "3d_terrain"}]}
+    ],
+    "layerControls": [
+      {
+        "id": "all-pois-visibility",
+        "label": "All POIs visibility",
+        "values": [{"name": "on"}, {"name": "off"}]
       }
-    },
-    "Passer la journée": {
-      "type": "geojson",
-      "cluster": false,
-      "data": {
-        "features": [
-          {
-            "type": "Feature",
-            "properties": {
-              "id": 4,
-              "nom": "Accueil de jour - St Joseph",
-              "adresse": "29-31 Rue Stanislas Torrents 13006 Marseille",
-              "horaires": "Lundi au vendredi 9h-13h",
-              "notes": ""
-            },
-            "geometry": {"coordinates": [5.378237, 43.287851], "type": "Point"},
-            "id": "1e55231ccee86a156924fcfc353f9b74"
-          },
-          {
-            "type": "Feature",
-            "properties": {
-              "id": 5,
-              "nom": "Accueil de jour - Lieutaud",
-              "adresse": "41 Cr. Lieutaud 13006 Marseille",
-              "horaires": "Lundi au vendredi 9h-16h30",
-              "notes": "Fermé mardi après-midi. Mercredi réservé aux femmes"
-            },
-            "geometry": {"coordinates": [5.382562, 43.293129], "type": "Point"},
-            "id": "55d04a65cf90d16107b7d9ef1080c70a"
-          },
-          {
-            "type": "Feature",
-            "properties": {
-              "id": 3,
-              "nom": "Secours Catholique - Malaval",
-              "adresse": "11 Rue Malaval 13002 Marseille",
-              "horaires": "Lundi, mercredi, jeudi et vendredi 8h30-11h",
-              "notes": ""
-            },
-            "geometry": {"coordinates": [5.3703, 43.30342], "type": "Point"},
-            "id": "621c87008eefe6afa86b1caa14ad269f"
-          },
-          {
-            "type": "Feature",
-            "properties": {
-              "id": 1,
-              "nom": "Accueil de jour - Crimée",
-              "adresse": "54 Rue de Crimée 13003 Marseille",
-              "horaires": "Lundi 9h-12h / Mardi, mercredi, jeudi, vendredi 9h-16h",
-              "notes": ""
-            },
-            "geometry": {"coordinates": [5.381088, 43.306791], "type": "Point"},
-            "id": "6a384c63c1409c362fb2872a500205f4"
-          },
-          {
-            "type": "Feature",
-            "properties": {
-              "id": 2,
-              "nom": "Accueil de jour - Bouès",
-              "adresse": "34B Boulevard Bouès 13003 Marseille",
-              "horaires": "Lundi au dimanche 8h-16h15",
-              "notes": "Fermé mardi après-midi et mercredi après-midi"
-            },
-            "geometry": {"coordinates": [5.381752, 43.312218], "type": "Point"},
-            "id": "dcd163fb989c2f325dd384bbe81a3f37"
-          }
-        ],
-        "type": "FeatureCollection"
-      }
-    }
+    ],
+    "version": "3.2.1",
+    "maputnik:renderer": "mlgljs"
   },
+  "light": {"anchor": "viewport", "intensity": 0.3, "position": [1.5, 235, 30]},
+  "sky": {
+    "sky-color": "hsl(208, 90%, 72%)",
+    "sky-horizon-blend": 0.2,
+    "horizon-color": "hsl(0, 0%, 100%)",
+    "horizon-fog-blend": 0.9,
+    "fog-color": "hsla(0, 0%, 100%, 0.2)",
+    "fog-ground-blend": 0.8,
+    "atmosphere-blend": 0.2
+  },
+  "projection": {"type": "globe"},
+  "sources": {
+    "aws": {
+      "attribution": "© <a href='https://docs.aws.amazon.com/location/latest/developerguide/data-attribution.html'>AWS</a>, <a href='https://legal.here.com/en-gb/terms/general-content-supplier-terms-and-notices'>HERE</a>",
+      "maxzoom": 17,
+      "tiles": [
+        "https://maps.geo.eu-west-1.amazonaws.com/v2/tiles/vector.basemap/{z}/{x}/{y}?key=v1.public.eyJqdGkiOiJiOTNkYjBlZi04OWUzLTQxMGUtODFhMC0zYjZjZjVmZWZmMDgifYtukap0NBaJpcrS6Vit9j03GJgK9Bn-RSu5UCe3jkdSql2kKp3IEgLPtyLssbmKUdVO11sXddjK3ZOZy8V6QG0olv0K_1tOxyMIe4DAO3IV6H4VzHWiaXlbSakGiEgFLuHBdcfLDeMotye7N6rSRxuZb0CN9ytH9VjLly6-NEBRZezO_qPQyvdTFdeZsARIpL0f9YVpxPxPVvUcAWYCk5LpaPseRCDPrY5SlCdA1ZKqUA4F9RzxSTxB73Fel_SoNDkCNaux1VposBu791-uUpDzUpr7leKckrPXrpZ2hwnFbafVxFV9vq4fLTpB5KoBksuLfGNIwAx1RLLxWuMhE4c.ZGQzZDY2OGQtMWQxMy00ZTEwLWIyZGUtOGVjYzUzMjU3OGE4"
+      ],
+      "type": "vector"
+    }  },
   "sprite": "https://maps.geo.eu-west-1.amazonaws.com/v2/styles/3_2_1/Standard/Light/Default/sprites/sprites",
   "glyphs": "https://maps.geo.eu-west-1.amazonaws.com/v2/glyphs/{fontstack}/{range}.pbf",
   "layers": [
