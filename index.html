@@ -204,111 +204,99 @@
 <button id="export-btn">⬇ Exporter l'image</button>
 
 <script>
-  const CATEGORIES = {
-    manger:   { label: 'Manger',   color: '#E05A2B', file: 'donnees/manger/manger.geojson' },
-    journee:  { label: 'Journée',  color: '#3A86C8', file: 'donnees/journee/journee.geojson' },
-    sante:    { label: 'Santé',    color: '#2BAE66', file: 'donnees/sante/sante.geojson' },
-    papiers:  { label: 'Papiers',  color: '#8B5CF6', file: 'donnees/papiers/papiers.geojson' },
-    francais: { label: 'Français', color: '#F59E0B', file: 'donnees/francais/francais.geojson' },
-  };
+const CATEGORIES = {
+  manger:   { label: 'Manger',   color: '#FFB000', file: 'donnees/manger/manger.geojson' },
+  journee:  { label: 'Journée',  color: '#648FFF', file: 'donnees/journee/journee.geojson' },
+  sante:    { label: 'Santé',    color: '#DC267F', file: 'donnees/sante/sante.geojson' },
+  papiers:  { label: 'Papiers',  color: '#785EF0', file: 'donnees/papiers/papiers.geojson' },
+  francais: { label: 'Français', color: '#FE6100', file: 'donnees/francais/francais.geojson' },
+};
 
-  const map = new maplibregl.Map({
-    container: 'map',
-    style: 'carte/style.json',
-    center: [5.3698, 43.2965],
-    zoom: 13,
-    preserveDrawingBuffer: false
-  });
+const map = new maplibregl.Map({
+  container: 'map',
+  style: 'carte/style.json',
+  center: [5.3698, 43.2965],
+  zoom: 13,
+  preserveDrawingBuffer: true
+});
 
-  document.getElementById('export-btn').addEventListener('click', () => {
+map.addControl(new maplibregl.NavigationControl(), 'bottom-right');
 
-  map.addControl(new maplibregl.NavigationControl(), 'bottom-right');
+const visible = { manger: true, journee: true, sante: true, papiers: true, francais: true };
 
-  // Suivi de l'état des filtres
-  const visible = { manger: true, journee: true, sante: true, papiers: true, francais: true };
+map.on('load', () => {
+  Object.entries(CATEGORIES).forEach(([cat, { color, file }]) => {
+    map.addSource(cat, { type: 'geojson', data: file });
 
-  map.on('load', () => {
-
-    // Chargement de chaque couche
-    Object.entries(CATEGORIES).forEach(([cat, { color, file }]) => {
-
-      map.addSource(cat, { type: 'geojson', data: file });
-
-      // Cercle de fond (halo)
-      map.addLayer({
-        id: `${cat}-halo`,
-        type: 'circle',
-        source: cat,
-        paint: {
-          'circle-radius': 14,
-          'circle-color': color,
-          'circle-opacity': 0.15
-        }
-      });
-
-      // Point principal
-      map.addLayer({
-        id: `${cat}-point`,
-        type: 'circle',
-        source: cat,
-        paint: {
-          'circle-radius': 8,
-          'circle-color': color,
-          'circle-stroke-width': 2,
-          'circle-stroke-color': '#ffffff'
-        }
-      });
-
-      // Popup au clic
-      map.on('click', `${cat}-point`, (e) => {
-        const p = e.features[0].properties;
-        const adresse = p.adresse || p['numéro de voie'] || '';
-        const noteHtml = p.notes
-          ? `<div class="popup-note">⚠️ ${p.notes}</div>`
-          : '';
-
-        new maplibregl.Popup({ offset: 12 })
-          .setLngLat(e.lngLat)
-          .setHTML(`
-            <div class="popup-header" style="background:${color}">
-              ${p.nom}
-            </div>
-            <div class="popup-body">
-              <div class="popup-field">
-                <strong>Adresse</strong>${adresse}
-              </div>
-              <div class="popup-field">
-                <strong>Horaires</strong>${p.horaires}
-              </div>
-              ${noteHtml}
-            </div>
-          `)
-          .addTo(map);
-      });
-
-      map.on('mouseenter', `${cat}-point`, () => map.getCanvas().style.cursor = 'pointer');
-      map.on('mouseleave', `${cat}-point`, () => map.getCanvas().style.cursor = '');
-    });
-  });
-
-  // Gestion des filtres
-  document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const cat = btn.dataset.cat;
-      visible[cat] = !visible[cat];
-
-      btn.classList.toggle('active', visible[cat]);
-      btn.classList.toggle('inactive', !visible[cat]);
-
-      const viz = visible[cat] ? 'visible' : 'none';
-      if (map.getLayer(`${cat}-point`)) {
-        map.setLayoutProperty(`${cat}-point`, 'visibility', viz);
-        map.setLayoutProperty(`${cat}-halo`,  'visibility', viz);
+    map.addLayer({
+      id: `${cat}-halo`,
+      type: 'circle',
+      source: cat,
+      paint: {
+        'circle-radius': 14,
+        'circle-color': color,
+        'circle-opacity': 0.15
       }
     });
+
+    map.addLayer({
+      id: `${cat}-point`,
+      type: 'circle',
+      source: cat,
+      paint: {
+        'circle-radius': 8,
+        'circle-color': color,
+        'circle-stroke-width': 2,
+        'circle-stroke-color': '#ffffff'
+      }
+    });
+
+    map.on('click', `${cat}-point`, (e) => {
+      const p = e.features[0].properties;
+      const adresse = p.adresse || p['numéro de voie'] || '';
+      const noteHtml = p.notes ? `<div class="popup-note">⚠️ ${p.notes}</div>` : '';
+      new maplibregl.Popup({ offset: 12 })
+        .setLngLat(e.lngLat)
+        .setHTML(`
+          <div class="popup-header" style="background:${color}">${p.nom}</div>
+          <div class="popup-body">
+            <div class="popup-field"><strong>Adresse</strong>${adresse}</div>
+            <div class="popup-field"><strong>Horaires</strong>${p.horaires}</div>
+            ${noteHtml}
+          </div>
+        `)
+        .addTo(map);
+    });
+
+    map.on('mouseenter', `${cat}-point`, () => map.getCanvas().style.cursor = 'pointer');
+    map.on('mouseleave', `${cat}-point`, () => map.getCanvas().style.cursor = '');
   });
-  
-  
+});
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const cat = btn.dataset.cat;
+    visible[cat] = !visible[cat];
+    btn.classList.toggle('active', visible[cat]);
+    btn.classList.toggle('inactive', !visible[cat]);
+    const viz = visible[cat] ? 'visible' : 'none';
+    if (map.getLayer(`${cat}-point`)) {
+      map.setLayoutProperty(`${cat}-point`, 'visibility', viz);
+      map.setLayoutProperty(`${cat}-halo`, 'visibility', viz);
+    }
+  });
+});
+
+document.getElementById('export-btn').addEventListener('click', () => {
+  map.once('idle', () => {
+    const canvas = map.getCanvas();
+    const link = document.createElement('a');
+    link.download = 'carte-migrants-marseille.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  });
+  map.triggerRepaint();
+});
 </script>
 
 </body>
