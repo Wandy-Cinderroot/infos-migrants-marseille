@@ -17,12 +17,12 @@
       --sante:    #DC267F;
       --papiers:  #785EF0;
       --francais: #FE6100;
-      --bg:       #F7F4EF;
-      --text:     #000000;
-      --panel:    #ffffff;
-      --border:   #e0dbd2;
+      --bg:       #111111;
+      --text:     #e8e8e8;
+      --panel:    #1a1a1a;
+      --border:   #2a2a2a;
+      --muted:    #666;
     }
-    
 
     body {
       font-family: 'DM Sans', sans-serif;
@@ -31,273 +31,516 @@
       height: 100vh;
       display: flex;
       flex-direction: column;
+      overflow: hidden;
     }
 
+    /* HEADER */
     header {
-      padding: 12px 20px;
+      padding: 10px 16px;
       background: var(--panel);
       border-bottom: 1px solid var(--border);
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 12px;
       z-index: 10;
+      flex-shrink: 0;
     }
 
-    header h1 {
-      font-size: 15px;
-      font-weight: 600;
-      letter-spacing: 0.02em;
+    header h1 { font-size: 14px; font-weight: 600; color: var(--text); }
+    header p  { font-size: 11px; color: var(--muted); }
+
+    .header-right {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
-    header p {
-      font-size: 12px;
-      color: #888;
+    /* VIEW TOGGLE */
+    .view-toggle {
+      display: flex;
+      background: var(--bg);
+      border-radius: 20px;
+      padding: 3px;
+      border: 1px solid var(--border);
+    }
+    .view-btn {
+      padding: 4px 12px;
+      border-radius: 16px;
+      border: none;
+      background: transparent;
+      font-family: inherit;
+      font-size: 11px;
+      font-weight: 500;
+      cursor: pointer;
+      color: var(--muted);
+      transition: all 0.2s;
+    }
+    .view-btn.active {
+      background: var(--text);
+      color: var(--bg);
     }
 
+    /* LANG DROPDOWN */
+    .lang-select {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 11px;
+      padding: 4px 8px;
+      border-radius: 16px;
+      cursor: pointer;
+      outline: none;
+    }
+    .lang-select option { background: var(--panel); }
+
+    /* FILTERS */
     .filters {
       display: flex;
-      gap: 8px;
+      gap: 6px;
       flex-wrap: wrap;
-      margin-left: auto;
+      align-items: center;
     }
-
     .filter-btn {
       display: flex;
       align-items: center;
-      gap: 6px;
-      padding: 5px 12px;
+      gap: 5px;
+      padding: 4px 10px;
       border-radius: 20px;
-      border: 2px solid transparent;
+      border: 1.5px solid currentColor;
       font-family: inherit;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 500;
       cursor: pointer;
       transition: opacity 0.2s, transform 0.1s;
-      background: var(--bg);
+      background: transparent;
     }
-
     .filter-btn:hover { transform: translateY(-1px); }
+    .filter-btn.inactive { opacity: 0.25; }
+    .filter-btn .dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
 
-    .filter-btn.active { border-color: currentColor; }
-    .filter-btn.inactive { opacity: 0.35; }
+    .filter-btn[data-layer="Manger"]                     { color: var(--manger); }
+    .filter-btn[data-layer="Passer la journée / Douche"] { color: var(--journee); }
+    .filter-btn[data-layer="Santé"]                      { color: var(--sante); }
+    .filter-btn[data-layer="Papiers / Aide Juridique"]   { color: var(--papiers); }
+    .filter-btn[data-layer="Cours de français"]          { color: var(--francais); }
 
-    .filter-btn .dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: currentColor;
-    }
-
-    .filter-btn[data-cat="manger"]   { color: var(--manger); }
-    .filter-btn[data-cat="journee"]  { color: var(--journee); }
-    .filter-btn[data-cat="sante"]    { color: var(--sante); }
-    .filter-btn[data-cat="papiers"]  { color: var(--papiers); }
-    .filter-btn[data-cat="francais"] { color: var(--francais); }
-
-    #map {
+    /* MAIN AREA */
+    .main {
       flex: 1;
-      width: 100%;
+      position: relative;
+      overflow: hidden;
     }
 
-    /* Popup */
+    /* MAP */
+    #map {
+      position: absolute;
+      inset: 0;
+    }
+
+    /* TABLE VIEW */
+    #table-view {
+      position: absolute;
+      inset: 0;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      display: none;
+      padding: 20px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+    }
+    #table-view::-webkit-scrollbar { width: 6px; }
+    #table-view::-webkit-scrollbar-track { background: transparent; }
+    #table-view::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+    /* CATEGORY SECTION */
+    .cat-section { margin-bottom: 24px; }
+
+    .cat-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      background: var(--panel);
+      border-radius: 10px;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      margin-bottom: 8px;
+      user-select: none;
+      transition: opacity 0.2s;
+    }
+    .cat-header:hover { opacity: 0.85; }
+
+    .cat-header-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .cat-header-label {
+      font-size: 13px;
+      font-weight: 600;
+      flex: 1;
+    }
+    .cat-header-count {
+      font-size: 11px;
+      color: var(--muted);
+    }
+    .cat-header-arrow {
+      font-size: 10px;
+      color: var(--muted);
+      transition: transform 0.2s;
+    }
+    .cat-header.collapsed .cat-header-arrow { transform: rotate(-90deg); }
+
+    .cat-body { display: flex; flex-direction: column; gap: 6px; }
+    .cat-body.collapsed { display: none; }
+
+    /* LIEU CARD */
+    .lieu-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 14px;
+      border-left: 3px solid var(--cat-color, #444);
+    }
+    .lieu-name {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+    .lieu-field {
+      font-size: 11px;
+      color: #888;
+      margin-bottom: 4px;
+      line-height: 1.5;
+    }
+    .lieu-field strong {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 1px;
+    }
+    .lieu-note {
+      margin-top: 8px;
+      padding: 6px 8px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 5px;
+      font-size: 11px;
+      color: #aaa;
+      line-height: 1.4;
+    }
+
+    /* POPUP */
     .maplibregl-popup-content {
       font-family: 'DM Sans', sans-serif;
       border-radius: 10px;
       padding: 0;
       overflow: hidden;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.12);
-      min-width: 220px;
-      max-width: 280px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      min-width: 200px;
+      max-width: 260px;
+      background: #1a1a1a;
     }
-
     .popup-header {
-      padding: 10px 14px 8px;
+      padding: 9px 12px 7px;
       font-weight: 600;
-      font-size: 13px;
+      font-size: 12px;
       color: white;
     }
-
     .popup-body {
-      padding: 10px 14px 12px;
-      background: white;
+      padding: 9px 12px 11px;
+      background: #1a1a1a;
     }
-
     .popup-field {
-      font-size: 12px;
-      color: #555;
-      margin-bottom: 5px;
+      font-size: 11px;
+      color: #aaa;
+      margin-bottom: 4px;
       line-height: 1.4;
     }
-
     .popup-field strong {
       display: block;
-      font-size: 10px;
+      font-size: 9px;
       text-transform: uppercase;
       letter-spacing: 0.06em;
-      color: #aaa;
-      margin-bottom: 2px;
+      color: #555;
+      margin-bottom: 1px;
     }
-
     .popup-note {
-      margin-top: 8px;
-      padding: 6px 8px;
-      background: #fdf6ec;
-      border-radius: 6px;
-      font-size: 11px;
+      margin-top: 6px;
+      padding: 5px 7px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 5px;
+      font-size: 10px;
       color: #888;
       line-height: 1.4;
     }
-
     .maplibregl-popup-close-button {
-      font-size: 16px;
-      color: rgba(255,255,255,0.8);
-      padding: 6px 10px;
+      font-size: 15px;
+      color: rgba(255,255,255,0.6);
+      padding: 5px 9px;
     }
-
     .maplibregl-popup-close-button:hover { color: white; background: transparent; }
-    #export-btn {
-    position: absolute;
-    bottom: 40px;
-    left: 16px;
-    z-index: 10;
-    padding: 8px 16px;
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    font-family: inherit;
-    font-size: 12px;
-    font-weight: 500;
-    cursor: pointer;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    transition: transform 0.1s;
-  }
-  #export-btn:hover { transform: translateY(-1px); }
-
+    .maplibregl-popup-tip { border-top-color: #1a1a1a !important; }
   </style>
 </head>
 <body>
 
 <header>
   <div>
-    <h1>Infos Migrants — Marseille</h1>
-    <p>Lieux d'aide et de services</p>
+    <h1 data-i18n="title">Infos Migrants — Marseille</h1>
+    <p data-i18n="subtitle">Lieux d'aide et de services</p>
   </div>
   <div class="filters">
-    <button class="filter-btn active" data-cat="manger">
-      <span class="dot"></span> Manger
-    </button>
-    <button class="filter-btn active" data-cat="journee">
-      <span class="dot"></span> Journée
-    </button>
-    <button class="filter-btn active" data-cat="sante">
-      <span class="dot"></span> Santé
-    </button>
-    <button class="filter-btn active" data-cat="papiers">
-      <span class="dot"></span> Papiers
-    </button>
-    <button class="filter-btn active" data-cat="francais">
-      <span class="dot"></span> Français
-    </button>
+    <button class="filter-btn" data-layer="Manger"><span class="dot"></span><span data-i18n="cat_manger">Manger</span></button>
+    <button class="filter-btn" data-layer="Passer la journée / Douche"><span class="dot"></span><span data-i18n="cat_journee">Journée</span></button>
+    <button class="filter-btn" data-layer="Santé"><span class="dot"></span><span data-i18n="cat_sante">Santé</span></button>
+    <button class="filter-btn" data-layer="Papiers / Aide Juridique"><span class="dot"></span><span data-i18n="cat_papiers">Papiers</span></button>
+    <button class="filter-btn" data-layer="Cours de français"><span class="dot"></span><span data-i18n="cat_francais">Français</span></button>
+  </div>
+  <div class="header-right">
+    <div class="view-toggle">
+      <button class="view-btn active" data-view="map" data-i18n="view_map">Carte</button>
+      <button class="view-btn" data-view="table" data-i18n="view_table">Liste</button>
+    </div>
+    <select class="lang-select" id="lang-select">
+      <option value="fr">FR</option>
+      <option value="en">EN</option>
+      <option value="ar">عربي</option>
+    </select>
   </div>
 </header>
 
-<div id="map"></div>
-<button id="export-btn">⬇ Exporter l'image</button>
+<div class="main">
+  <div id="map"></div>
+  <div id="table-view"></div>
+</div>
 
 <script>
-const CATEGORIES = {
-  manger:   { label: 'Manger',   color: '#FFB000', file: 'donnees/manger/manger.geojson' },
-  journee:  { label: 'Journée',  color: '#648FFF', file: 'donnees/journee/journee.geojson' },
-  sante:    { label: 'Santé',    color: '#DC267F', file: 'donnees/sante/sante.geojson' },
-  papiers:  { label: 'Papiers',  color: '#785EF0', file: 'donnees/papiers/papiers.geojson' },
-  francais: { label: 'Français', color: '#FE6100', file: 'donnees/francais/francais.geojson' },
+// ─── TRADUCTIONS ───────────────────────────────────────────────────────────────
+const I18N = {
+  fr: {
+    title: "Infos Migrants — Marseille",
+    subtitle: "Lieux d'aide et de services",
+    cat_manger: "Manger",
+    cat_journee: "Journée",
+    cat_sante: "Santé",
+    cat_papiers: "Papiers",
+    cat_francais: "Français",
+    view_map: "Carte",
+    view_table: "Liste",
+    address: "Adresse",
+    hours: "Horaires",
+    note: "Note",
+    places: "lieux",
+  },
+  en: {
+    title: "Migrants Info — Marseille",
+    subtitle: "Help & service locations",
+    cat_manger: "Food",
+    cat_journee: "Day center",
+    cat_sante: "Health",
+    cat_papiers: "Papers",
+    cat_francais: "French",
+    view_map: "Map",
+    view_table: "List",
+    address: "Address",
+    hours: "Hours",
+    note: "Note",
+    places: "places",
+  },
+  ar: {
+    title: "معلومات المهاجرين — مرسيليا",
+    subtitle: "أماكن المساعدة والخدمات",
+    cat_manger: "الطعام",
+    cat_journee: "مركز نهاري",
+    cat_sante: "الصحة",
+    cat_papiers: "الأوراق",
+    cat_francais: "الفرنسية",
+    view_map: "الخريطة",
+    view_table: "القائمة",
+    address: "العنوان",
+    hours: "المواعيد",
+    note: "ملاحظة",
+    places: "أماكن",
+  }
 };
 
+let currentLang = 'fr';
+function t(key) { return I18N[currentLang][key] || key; }
+
+function applyLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    el.textContent = t(el.getAttribute('data-i18n'));
+  });
+  if (lang === 'ar') {
+    document.body.setAttribute('dir', 'rtl');
+  } else {
+    document.body.removeAttribute('dir');
+  }
+  renderTable();
+}
+
+document.getElementById('lang-select').addEventListener('change', (e) => {
+  applyLang(e.target.value);
+});
+
+// ─── CATEGORIES ────────────────────────────────────────────────────────────────
+const CATEGORIES = {
+  "Manger":                     { color: '#FFB000', i18n: 'cat_manger',   file: 'donnees/manger/manger.geojson' },
+  "Passer la journée / Douche": { color: '#648FFF', i18n: 'cat_journee',  file: 'donnees/journee/journee.geojson' },
+  "Santé":                      { color: '#DC267F', i18n: 'cat_sante',    file: 'donnees/sante/sante.geojson' },
+  "Papiers / Aide Juridique":   { color: '#785EF0', i18n: 'cat_papiers',  file: 'donnees/papiers/papiers.geojson' },
+  "Cours de français":          { color: '#FE6100', i18n: 'cat_francais', file: 'donnees/francais/francais.geojson' },
+};
+
+const visibleCats = {};
+Object.keys(CATEGORIES).forEach(k => visibleCats[k] = true);
+
+// Données chargées pour le tableau
+const allData = {};
+
+// ─── CHARGEMENT DES GEOJSON ────────────────────────────────────────────────────
+async function loadData() {
+  for (const [cat, { file }] of Object.entries(CATEGORIES)) {
+    try {
+      const res = await fetch(file);
+      const geojson = await res.json();
+      allData[cat] = geojson.features.map(f => f.properties);
+    } catch (e) {
+      allData[cat] = [];
+    }
+  }
+  renderTable();
+}
+
+// ─── CARTE ─────────────────────────────────────────────────────────────────────
 const map = new maplibregl.Map({
   container: 'map',
   style: 'carte/style.json',
   center: [5.3698, 43.2965],
   zoom: 13,
-  preserveDrawingBuffer: true
+  preserveDrawingBuffer: false
 });
 
 map.addControl(new maplibregl.NavigationControl(), 'bottom-right');
 
-const visible = { manger: true, journee: true, sante: true, papiers: true, francais: true };
+document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('inactive'));
 
 map.on('load', () => {
-  Object.entries(CATEGORIES).forEach(([cat, { color, file }]) => {
-    map.addSource(cat, { type: 'geojson', data: file });
-
-    map.addLayer({
-      id: `${cat}-halo`,
-      type: 'circle',
-      source: cat,
-      paint: {
-        'circle-radius': 14,
-        'circle-color': color,
-        'circle-opacity': 0.15
-      }
-    });
-
-    map.addLayer({
-      id: `${cat}-point`,
-      type: 'circle',
-      source: cat,
-      paint: {
-        'circle-radius': 4,
-        'circle-color': color,
-        'circle-stroke-width': 1,
-        'circle-stroke-color': color,
-        'circle-stroke-opacity': 0.7
-      }
-    });
-
-    map.on('click', `${cat}-point`, (e) => {
+  Object.entries(CATEGORIES).forEach(([layerId, { color }]) => {
+    map.on('click', layerId, (e) => {
       const p = e.features[0].properties;
       const adresse = p.adresse || p['numéro de voie'] || '';
-      const noteHtml = p.notes ? `<div class="popup-note">⚠️ ${p.notes}</div>` : '';
-      new maplibregl.Popup({ offset: 12 })
+      const noteHtml = p.notes
+        ? `<div class="popup-note">⚠️ ${p.notes}</div>`
+        : '';
+      new maplibregl.Popup({ offset: 10 })
         .setLngLat(e.lngLat)
         .setHTML(`
           <div class="popup-header" style="background:${color}">${p.nom}</div>
           <div class="popup-body">
-            <div class="popup-field"><strong>Adresse</strong>${adresse}</div>
-            <div class="popup-field"><strong>Horaires</strong>${p.horaires}</div>
+            <div class="popup-field"><strong>${t('address')}</strong>${adresse}</div>
+            <div class="popup-field"><strong>${t('hours')}</strong>${p.horaires}</div>
             ${noteHtml}
           </div>
         `)
         .addTo(map);
     });
-
-    map.on('mouseenter', `${cat}-point`, () => map.getCanvas().style.cursor = 'pointer');
-    map.on('mouseleave', `${cat}-point`, () => map.getCanvas().style.cursor = '');
+    map.on('mouseenter', layerId, () => map.getCanvas().style.cursor = 'pointer');
+    map.on('mouseleave', layerId, () => map.getCanvas().style.cursor = '');
   });
 });
 
+// ─── FILTRES ───────────────────────────────────────────────────────────────────
 document.querySelectorAll('.filter-btn').forEach(btn => {
   btn.addEventListener('click', () => {
-    const cat = btn.dataset.cat;
-    visible[cat] = !visible[cat];
-    btn.classList.toggle('active', visible[cat]);
-    btn.classList.toggle('inactive', !visible[cat]);
-    const viz = visible[cat] ? 'visible' : 'none';
-    if (map.getLayer(`${cat}-point`)) {
-      map.setLayoutProperty(`${cat}-point`, 'visibility', viz);
-      map.setLayoutProperty(`${cat}-halo`, 'visibility', viz);
+    const layer = btn.dataset.layer;
+    visibleCats[layer] = !visibleCats[layer];
+    btn.classList.toggle('inactive', !visibleCats[layer]);
+    if (map.getLayer(layer)) {
+      map.setLayoutProperty(layer, 'visibility', visibleCats[layer] ? 'visible' : 'none');
     }
+    renderTable();
   });
 });
 
-document.getElementById('export-btn').addEventListener('click', () => {
-  map.once('idle', () => {
-    const canvas = map.getCanvas();
-    const link = document.createElement('a');
-    link.download = 'carte-migrants-marseille.png';
-    link.href = canvas.toDataURL('image/png');
-    link.click();
+// ─── VUE CARTE / LISTE ─────────────────────────────────────────────────────────
+let currentView = 'map';
+
+document.querySelectorAll('.view-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    currentView = btn.dataset.view;
+    document.querySelectorAll('.view-btn').forEach(b => b.classList.toggle('active', b.dataset.view === currentView));
+    document.getElementById('map').style.display = currentView === 'map' ? 'block' : 'none';
+    document.getElementById('table-view').style.display = currentView === 'table' ? 'block' : 'none';
+    if (currentView === 'map') map.resize();
   });
-  map.triggerRepaint();
 });
+
+// ─── TABLEAU ───────────────────────────────────────────────────────────────────
+const catCollapsed = {};
+Object.keys(CATEGORIES).forEach(k => catCollapsed[k] = false);
+
+function renderTable() {
+  const container = document.getElementById('table-view');
+  container.innerHTML = '';
+
+  Object.entries(CATEGORIES).forEach(([cat, { color, i18n }]) => {
+    if (!visibleCats[cat]) return;
+
+    const lieux = allData[cat] || [];
+    const collapsed = catCollapsed[cat];
+
+    const section = document.createElement('div');
+    section.className = 'cat-section';
+
+    const header = document.createElement('div');
+    header.className = 'cat-header' + (collapsed ? ' collapsed' : '');
+    header.innerHTML = `
+      <span class="cat-header-dot" style="background:${color}"></span>
+      <span class="cat-header-label">${t(i18n)}</span>
+      <span class="cat-header-count">${lieux.length} ${t('places')}</span>
+      <span class="cat-header-arrow">▾</span>
+    `;
+    header.addEventListener('click', () => {
+      catCollapsed[cat] = !catCollapsed[cat];
+      header.classList.toggle('collapsed', catCollapsed[cat]);
+      body.classList.toggle('collapsed', catCollapsed[cat]);
+    });
+
+    const body = document.createElement('div');
+    body.className = 'cat-body' + (collapsed ? ' collapsed' : '');
+
+    lieux.forEach(p => {
+      const adresse = p.adresse || p['numéro de voie'] || '';
+      const noteHtml = p.notes
+        ? `<div class="lieu-note">⚠️ ${p.notes}</div>`
+        : '';
+
+      const card = document.createElement('div');
+      card.className = 'lieu-card';
+      card.style.setProperty('--cat-color', color);
+      card.innerHTML = `
+        <div class="lieu-name">${p.nom}</div>
+        <div class="lieu-field"><strong>${t('address')}</strong>${adresse}</div>
+        <div class="lieu-field"><strong>${t('hours')}</strong>${p.horaires}</div>
+        ${noteHtml}
+      `;
+      body.appendChild(card);
+    });
+
+    section.appendChild(header);
+    section.appendChild(body);
+    container.appendChild(section);
+  });
+}
+
+loadData();
 </script>
 
 </body>
