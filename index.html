@@ -429,6 +429,59 @@ const map = new maplibregl.Map({
 
 map.addControl(new maplibregl.NavigationControl(), 'bottom-right');
 
+map.on('load', () => {
+
+  // Chargement des sources et layers
+  Object.entries(CATEGORIES).forEach(([cat, { color, file }]) => {
+    map.addSource(cat, { type: 'geojson', data: file });
+
+    map.addLayer({
+      id: `${cat}-halo`,
+      type: 'circle',
+      source: cat,
+      paint: {
+        'circle-radius': 10,
+        'circle-color': color,
+        'circle-opacity': 0.15
+      }
+    });
+
+    map.addLayer({
+      id: `${cat}-point`,
+      type: 'circle',
+      source: cat,
+      paint: {
+        'circle-radius': 5,
+        'circle-color': color,
+        'circle-stroke-width': 1.5,
+        'circle-stroke-color': '#ffffff'
+      }
+    });
+
+    map.on('click', `${cat}-point`, (e) => {
+      const p = e.features[0].properties;
+      const adresse = p.adresse || p['numéro de voie'] || '';
+      const noteHtml = p.notes
+        ? `<div class="popup-note">⚠️ ${p.notes}</div>`
+        : '';
+      new maplibregl.Popup({ offset: 10 })
+        .setLngLat(e.lngLat)
+        .setHTML(`
+          <div class="popup-header" style="background:${color}">${p.nom}</div>
+          <div class="popup-body">
+            <div class="popup-field"><strong>${t('address')}</strong>${adresse}</div>
+            <div class="popup-field"><strong>${t('hours')}</strong>${p.horaires}</div>
+            ${noteHtml}
+          </div>
+        `)
+        .addTo(map);
+    });
+
+    map.on('mouseenter', `${cat}-point`, () => map.getCanvas().style.cursor = 'pointer');
+    map.on('mouseleave', `${cat}-point`, () => map.getCanvas().style.cursor = '');
+  });
+});
+
 document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('inactive'));
 
 map.on('load', () => {
@@ -462,9 +515,10 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
     const layer = btn.dataset.layer;
     visibleCats[layer] = !visibleCats[layer];
     btn.classList.toggle('inactive', !visibleCats[layer]);
-    if (map.getLayer(layer)) {
-      map.setLayoutProperty(layer, 'visibility', visibleCats[layer] ? 'visible' : 'none');
-    }
+    if (map.getLayer(`${layer}-point`)) {
+  map.setLayoutProperty(`${layer}-point`, 'visibility', viz);
+  map.setLayoutProperty(`${layer}-halo`, 'visibility', viz);
+}
     renderTable();
   });
 });
